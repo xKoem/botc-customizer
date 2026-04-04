@@ -1,0 +1,33 @@
+/*
+disable_script_name_center
+Disable script name
+*/
+.town-info > .edition {
+    display: none;
+}
+
+.town-info > .meta {
+    display: none !important;
+}
+
+/*
+disable_pointer_events_on_character_mid
+Disable pointer events for character mid
+*/
+.team-special.role-dusk,
+.team-special.role-dawn,
+.team-special.role-minioninfo,
+.team-special.role-demoninfo{
+    color:{{color|#ccc}};
+}
+
+/*
+test
+Night order costam
+*/
+.team-special.role-dusk,
+.team-special.role-dawn,
+.team-special.role-minioninfo,
+.team-special.role-demoninfo{
+    color:{{color|#ccc}}{{another|some text}}{{andanother|some more text}};
+}
