@@ -30,6 +30,9 @@ function parseFile(content) {
     const blocks = [];
     const regex = /\/\*\s*\n([\s\S]*?)\n\*\/\s*([\s\S]*?)(?=\/\*|$)/g;
 
+    const seenKeys = new Set();
+    const duplicateKeys = new Set();
+
     let match;
     while ((match = regex.exec(content))) {
         const comment = match[1].trim().split("\n");
@@ -37,6 +40,14 @@ function parseFile(content) {
 
         const key = comment[0]?.trim();
         const description = comment[1]?.trim() || "";
+
+        if (!key) continue;
+
+        if (seenKeys.has(key)) {
+            duplicateKeys.add(key);
+        } else {
+            seenKeys.add(key);
+        }
 
         const { variables, cleanedCss } = parseVariables(css);
 
@@ -46,6 +57,12 @@ function parseFile(content) {
             cssText: cleanedCss,
             variables,
         });
+    }
+
+    // 🚨 Fail if duplicates found
+    if (duplicateKeys.size > 0) {
+        const list = Array.from(duplicateKeys).join(", ");
+        throw new Error(`Duplicate template keys found: ${list}`);
     }
 
     return blocks;
