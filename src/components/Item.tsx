@@ -1,5 +1,6 @@
-import { Checkbox, TextField, Box, Typography } from "@mui/material";
+import {Checkbox, TextField, FormControlLabel} from "@mui/material";
 import { Template, TemplateState } from "../types/types";
+import './Item.css'
 
 interface Props {
     template: Template;
@@ -8,30 +9,28 @@ interface Props {
     onChangeVar: (key: string, value: string) => void;
 }
 
-export default function TemplateItem({
+export default function Item({
                                          template,
                                          state,
                                          onToggle,
                                          onChangeVar
                                      }: Props) {
     return (
-        <Box mt={2} p={2} border="1px solid #ccc">
-            <Checkbox checked={state.enabled} onChange={onToggle} />
+        <div className="item-container">
+            <FormControlLabel control={<Checkbox checked={state.enabled} onChange={onToggle}/>}
+                                  label={template.description} />
+            <div className={"item-variables"}>
+                {template.variables?.map(v => (
+                    <TextField
+                        key={v.key}
+                        label={v.key}
+                        value={state.variables[v.key]}
+                        onChange={e => onChangeVar(v.key, e.target.value)}
+                        margin="normal"
+                    />
+                ))}
+            </div>
 
-            <Typography variant="h6">
-                {template.description}
-            </Typography>
-
-            {template.variables?.map(v => (
-                <TextField
-                    key={v.key}
-                    label={v.key}
-                    value={state.variables[v.key]}
-                    onChange={e => onChangeVar(v.key, e.target.value)}
-                    fullWidth
-                    margin="normal"
-                />
-            ))}
-        </Box>
+        </div>
     );
 }

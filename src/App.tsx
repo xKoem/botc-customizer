@@ -3,11 +3,11 @@ import { templates } from "./data/templates";
 import { TemplateState } from "./types/types";
 import { generateCSS } from "./utils/cssGenerator";
 import { Button, Box, TextField } from "@mui/material";
-import TemplateItem from "./components/Item";
+import Item from "./components/Item";
 
 export default function App() {
     const [state, setState] = useState<TemplateState[]>([]);
-    const [output, setOutput] = useState("");
+    const [cssTestValue, setCssTestValue] = useState("");
 
     useEffect(() => {
         const saved = JSON.parse(localStorage.getItem("cssConfig") || "[]");
@@ -36,7 +36,7 @@ export default function App() {
 
     const handleGenerate = () => {
         const css = generateCSS(state, templates());
-        setOutput(css);
+        setCssTestValue(css);
         localStorage.setItem("cssConfig", JSON.stringify(state));
     };
 
@@ -47,7 +47,7 @@ export default function App() {
                 if (!current) return null;
 
                 return (
-                    <TemplateItem
+                    <Item
                         key={template.key}
                         template={template}
                         state={current}
@@ -69,14 +69,14 @@ export default function App() {
             })}
 
             <Button onClick={handleGenerate} variant="contained">
-                Generate CSS
+                Save and Generate CSS
             </Button>
 
             <TextField
                 multiline
                 rows={10}
                 fullWidth
-                value={output}
+                value={cssTestValue}
                 sx={{ mt: 2 }}
             />
         </Box>

@@ -45,11 +45,19 @@ const json: Template[] = [
                     .team-special.role-dawn,
                     .team-special.role-minioninfo,
                     .team-special.role-demoninfo{
-                      color:{{color}};
+                      color:{{color}}{{another}}{{andanother}};
                     }`,
         variables: [{
             key: "color",
             default: "#ddd"
+        },
+        {
+            key: "another",
+            default: "some text"
+        },
+        {
+            key: "andanother",
+            default: "some text"
         }]
     }
 ]

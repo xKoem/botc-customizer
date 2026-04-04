@@ -1,0 +1,10 @@
+.item-variables {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 2em;
+}
+
+.item-variables div {
+    flex-wrap: wrap;
+    margin-right: 0.2em;
+}
