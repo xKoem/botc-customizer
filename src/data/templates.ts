@@ -38,7 +38,7 @@ export const templates: Template[] = [
         ]
     },
     {
-        "key": "anotherr_test",
+        "key": "test",
         "description": "More testing",
         "cssText": ".team-special.role-dusk,\n.team-special.role-dawn,\n.team-special.role-minioninfo,\n.team-special.role-demoninfo{\n    color:{{color}}{{another}}{{andanother}};\n}",
         "variables": [
