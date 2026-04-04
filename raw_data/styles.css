@@ -42,3 +42,14 @@ More testing
 .team-special.role-demoninfo{
     color:{{color|#ccc}}{{another|some text}}{{andanother|some more text}};
 }
+
+/*
+disable_pointer_events_on_character_mid
+More testing with duplicates
+*/
+.team-special.role-dusk,
+.team-special.role-dawn,
+.team-special.role-minioninfo,
+.team-special.role-demoninfo{
+    color:{{color|#ccc}}{{another|some text}}{{andanother|some more text}};
+}
