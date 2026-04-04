@@ -36,5 +36,24 @@ export const templates: Template[] = [
                 "default": "some more text"
             }
         ]
+    },
+    {
+        "key": "anotherr_test",
+        "description": "More testing",
+        "cssText": ".team-special.role-dusk,\n.team-special.role-dawn,\n.team-special.role-minioninfo,\n.team-special.role-demoninfo{\n    color:{{color}}{{another}}{{andanother}};\n}",
+        "variables": [
+            {
+                "key": "color",
+                "default": "#ccc"
+            },
+            {
+                "key": "another",
+                "default": "some text"
+            },
+            {
+                "key": "andanother",
+                "default": "some more text"
+            }
+        ]
     }
 ];
