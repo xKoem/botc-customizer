@@ -1,0 +1,44 @@
+name: Update CSS Templates
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps
+        run: npm ci || npm install
+
+      - name: Run parser
+        run: node scripts/parseCssTemplate.js
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          
+          git add src/data/templates.ts
+          
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "auto: update templates from CSS"
+            git push origin HEAD:${{ github.head_ref }}
+          fi

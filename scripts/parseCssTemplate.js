@@ -1,0 +1,66 @@
+const fs = require("fs");
+const path = require("path");
+
+const INPUT_FILE = "raw_data/styles.css";
+const OUTPUT_FILE = "src/data/templates.ts";
+
+function parseVariables(css) {
+    const regex = /\{\{(\w+)\|([^}]+)\}\}/g;
+    const variables = [];
+    const seen = new Set();
+
+    let match;
+    while ((match = regex.exec(css))) {
+        const key = match[1];
+        const def = match[2];
+
+        if (!seen.has(key)) {
+            seen.add(key);
+            variables.push({ key, default: def });
+        }
+    }
+
+    // replace {{key|default}} -> {{key}}
+    const cleanedCss = css.replace(regex, (_, key) => `{{${key}}}`);
+
+    return { variables, cleanedCss };
+}
+
+function parseFile(content) {
+    const blocks = [];
+    const regex = /\/\*\s*\n([\s\S]*?)\n\*\/\s*([\s\S]*?)(?=\/\*|$)/g;
+
+    let match;
+    while ((match = regex.exec(content))) {
+        const comment = match[1].trim().split("\n");
+        const css = match[2].trim();
+
+        const key = comment[0]?.trim();
+        const description = comment[1]?.trim() || "";
+
+        const { variables, cleanedCss } = parseVariables(css);
+
+        blocks.push({
+            key,
+            description,
+            cssText: cleanedCss,
+            variables,
+        });
+    }
+
+    return blocks;
+}
+
+function generateTS(data) {
+    return `import {Template} from "../types/types";
+
+export const templates: Template[] = ${JSON.stringify(data, null, 4)};\n`;
+}
+
+const input = fs.readFileSync(INPUT_FILE, "utf-8");
+const parsed = parseFile(input);
+const output = generateTS(parsed);
+
+fs.writeFileSync(OUTPUT_FILE, output);
+
+console.log("✅ Templates generated:", OUTPUT_FILE);
