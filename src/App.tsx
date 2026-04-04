@@ -12,7 +12,7 @@ export default function App() {
     useEffect(() => {
         const saved = JSON.parse(localStorage.getItem("cssConfig") || "[]");
 
-        const initial = templates().map(t => ({
+        const initial = templates.map(t => ({
             key: t.key,
             enabled: saved.find((s: any) => s.key === t.key)?.enabled ?? true,
             variables: Object.fromEntries(
@@ -35,14 +35,14 @@ export default function App() {
     };
 
     const handleGenerate = () => {
-        const css = generateCSS(state, templates());
+        const css = generateCSS(state, templates);
         setCssTestValue(css);
         localStorage.setItem("cssConfig", JSON.stringify(state));
     };
 
     return (
         <Box p={3}>
-            {templates().map(template => {
+            {templates.map(template => {
                 const current = state.find(s => s.key === template.key);
                 if (!current) return null;
 
