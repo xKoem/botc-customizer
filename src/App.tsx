@@ -4,10 +4,12 @@ import { TemplateState } from "./types/types";
 import { generateCSS } from "./utils/cssGenerator";
 import { Button, Box, TextField } from "@mui/material";
 import Item from "./components/Item";
+import { Snackbar, Alert } from "@mui/material";
 
 export default function App() {
     const [state, setState] = useState<TemplateState[]>([]);
     const [cssTestValue, setCssTestValue] = useState("");
+    const [copied, setCopied] = useState(false);
 
     useEffect(() => {
         const saved = JSON.parse(localStorage.getItem("cssConfig") || "[]");
@@ -38,6 +40,9 @@ export default function App() {
         const css = generateCSS(state, templates);
         setCssTestValue(css);
         localStorage.setItem("cssConfig", JSON.stringify(state));
+        navigator.clipboard.writeText(css).then(r => {
+            setCopied(true);
+        });
     };
 
     return (
@@ -79,6 +84,17 @@ export default function App() {
                 value={cssTestValue}
                 sx={{ mt: 2 }}
             />
+
+            <Snackbar
+                open={copied}
+                autoHideDuration={1500}
+                onClose={() => setCopied(false)}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            >
+                <Alert severity="success" variant="filled">
+                    Copied to clipboard!
+                </Alert>
+            </Snackbar>
         </Box>
     );
 }
