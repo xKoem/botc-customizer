@@ -41,7 +41,7 @@ export const templates: Template[] = [
     },
     {
         "key": "another_key",
-        "description": "another lol wich more changes",
+        "description": "another lol with more changes",
         "cssText": ".team-special.role-dusk,\n.team-special.role-dawn,\n.team-special.role-minioninfo,\n.team-special.role-demoninfo{\n    something: lol;\n    another: xd;\n}",
         "variables": []
     },
