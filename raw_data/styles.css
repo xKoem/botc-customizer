@@ -44,7 +44,18 @@ another lol
 }
 
 /*
-more keys
+more_keys
+another lol 2
+*/
+.team-special.role-dusk,
+.team-special.role-dawn,
+.team-special.role-minioninfo,
+.team-special.role-demoninfo{
+    something: lol;
+}
+
+/*
+even_more_keys
 another lol 2
 */
 .team-special.role-dusk,
