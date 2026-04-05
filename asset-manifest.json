@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/botc-customizer/static/css/main.8fe9731b.css",
-    "main.js": "/botc-customizer/static/js/main.63bbb315.js",
+    "main.js": "/botc-customizer/static/js/main.53eea5aa.js",
     "static/js/453.5375b08f.chunk.js": "/botc-customizer/static/js/453.5375b08f.chunk.js",
     "index.html": "/botc-customizer/index.html",
     "main.8fe9731b.css.map": "/botc-customizer/static/css/main.8fe9731b.css.map",
-    "main.63bbb315.js.map": "/botc-customizer/static/js/main.63bbb315.js.map",
+    "main.53eea5aa.js.map": "/botc-customizer/static/js/main.53eea5aa.js.map",
     "453.5375b08f.chunk.js.map": "/botc-customizer/static/js/453.5375b08f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8fe9731b.css",
-    "static/js/main.63bbb315.js"
+    "static/js/main.53eea5aa.js"
   ]
 }
