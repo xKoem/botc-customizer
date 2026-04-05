@@ -44,5 +44,17 @@ export const templates: Template[] = [
         "description": "another lol",
         "cssText": ".team-special.role-dusk,\n.team-special.role-dawn,\n.team-special.role-minioninfo,\n.team-special.role-demoninfo{\n    something: lol;\n}",
         "variables": []
+    },
+    {
+        "key": "more_keys",
+        "description": "another lol 2",
+        "cssText": ".team-special.role-dusk,\n.team-special.role-dawn,\n.team-special.role-minioninfo,\n.team-special.role-demoninfo{\n    something: lol;\n}",
+        "variables": []
+    },
+    {
+        "key": "even_more_keys",
+        "description": "another lol 2",
+        "cssText": ".team-special.role-dusk,\n.team-special.role-dawn,\n.team-special.role-minioninfo,\n.team-special.role-demoninfo{\n    something: lol;\n}",
+        "variables": []
     }
 ];

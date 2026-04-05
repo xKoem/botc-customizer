@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  build-templates:
     runs-on: ubuntu-latest
 
     permissions:
