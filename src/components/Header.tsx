@@ -13,7 +13,7 @@ export default function Header() {
                     }}
                 >
                    <Box className="headerInner">
-                       <img src="botc-customizer/favicon.ico" height="32px"/>
+                       <img src="botc-customizer/favicon.ico" height="32px" alt="logo"/>
                        <div>BotC Darky Customizer</div>
                    </Box>
                 </Typography>

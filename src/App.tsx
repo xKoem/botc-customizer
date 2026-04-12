@@ -10,25 +10,29 @@ import Header from "./components/Header";
 
 export default function App() {
     const [state, setState] = useState<TemplateState[]>([]);
-    const [cssTestValue, setCssTestValue] = useState("");
+    const [cssValue, setCssValue] = useState("");
     const [copied, setCopied] = useState(false);
+    const [errorOnClipboard, setErrorOnClipboard] = useState(false);
+    const [loadedFromClipboard, setLoadedFromClipboard] = useState(false);
 
-    useEffect(() => {
-        const saved = JSON.parse(localStorage.getItem("cssConfig") || "[]");
-
-        const initial = templates.map(t => ({
+    const mapFromSavedJsonToConfig = (json: any)=> {
+        return templates.map(t => ({
             key: t.key,
-            enabled: saved.find((s: any) => s.key === t.key)?.enabled ?? true,
+            enabled: json.find((s: any) => s.key === t.key)?.enabled ?? true,
             variables: Object.fromEntries(
                 t.variables?.map(v => [
                     v.key,
-                    saved.find((s: any) => s.key === t.key)?.variables?.[v.key] ??
+                    json.find((s: any) => s.key === t.key)?.variables?.[v.key] ??
                     v.default ??
                     ""
                 ]) ?? []
             )
         }));
+    }
 
+    useEffect(() => {
+        const saved = JSON.parse(localStorage.getItem("cssConfig") || "[]");
+        const initial = mapFromSavedJsonToConfig(saved);
         setState(initial);
     }, []);
 
@@ -40,15 +44,39 @@ export default function App() {
 
     const handleGenerate = () => {
         const css = generateCSS(state, templates);
-        setCssTestValue(css);
+        setCssValue(css);
         localStorage.setItem("cssConfig", JSON.stringify(state));
         navigator.clipboard.writeText(css).then(r => {
             setCopied(true);
         });
     };
 
+    const handleFromClipboard = () => {
+        navigator.clipboard.readText().then(text => {
+            const config = extractJsonConfig(text)
+            console.log(config);
+            if (config) {
+                try {
+                    const json = JSON.parse(config)
+                    const parsed = mapFromSavedJsonToConfig(json)
+                    setState(parsed);
+                    setLoadedFromClipboard(true);
+                } catch {
+                    setErrorOnClipboard(true);
+                    return;
+                }
+            }
+        })
+    };
+
+    const extractJsonConfig = (css: string): string => {
+        return css.split("End of JSON config - do not remove*/")
+            .at(0)
+            ?.replace("/*Start of JSON config - do not remove", "").trim() || ""
+    }
+
     return (
-        <div>
+        <div className="main">
             <Header/>
             <Box p={3}>
                 {templates.map(template => {
@@ -77,26 +105,54 @@ export default function App() {
                     );
                 })}
 
-                <Button onClick={handleGenerate} variant="contained">
-                    Save and Generate CSS
-                </Button>
+                <div className="buttons">
+                    <Button onClick={handleFromClipboard} variant="contained">
+                        Load old config from clipboard
+                    </Button>
+
+                    <Button onClick={handleGenerate} variant="contained">
+                        Save and Generate CSS
+                    </Button>
+                </div>
 
                 <TextField
                     multiline
                     rows={10}
                     fullWidth
-                    value={cssTestValue}
+                    value={cssValue}
                     sx={{ mt: 2 }}
                 />
 
                 <Snackbar
                     open={copied}
-                    autoHideDuration={1500}
+                    autoHideDuration={2500}
                     onClose={() => setCopied(false)}
                     anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 >
                     <Alert severity="success" variant="filled">
                         Copied to clipboard!
+                    </Alert>
+                </Snackbar>
+
+                <Snackbar
+                    open={loadedFromClipboard}
+                    autoHideDuration={3500}
+                    onClose={() => setLoadedFromClipboard(false)}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                >
+                    <Alert severity="success" variant="filled">
+                        Config loaded from clipboard!
+                    </Alert>
+                </Snackbar>
+
+                <Snackbar
+                    open={errorOnClipboard}
+                    autoHideDuration={3500}
+                    onClose={() => setErrorOnClipboard(false)}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                >
+                    <Alert severity="error" variant="filled">
+                        Error on copying from clipboard!
                     </Alert>
                 </Snackbar>
 
