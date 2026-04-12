@@ -10,6 +10,8 @@ import Header from "./components/Header";
 import {mapFromSavedJsonToConfig} from "./Helpers";
 import SaveIcon from '@mui/icons-material/Save';
 import UploadIcon from '@mui/icons-material/Upload';
+import RestoreIcon from '@mui/icons-material/Restore';
+
 
 
 export default function App() {
@@ -18,6 +20,7 @@ export default function App() {
     const [copied, setCopied] = useState(false);
     const [errorOnClipboard, setErrorOnClipboard] = useState(false);
     const [loadedFromClipboard, setLoadedFromClipboard] = useState(false);
+    const [resetToDef, setResetToDef] = useState(false);
 
     useEffect(() => {
         const saved = JSON.parse(localStorage.getItem("cssConfig") || "[]");
@@ -56,6 +59,11 @@ export default function App() {
                 }
             }
         })
+    };
+
+    const handleResetToDefaults = () => {
+        setState(mapFromSavedJsonToConfig([]));
+        setResetToDef(true);
     };
 
     return (
@@ -103,6 +111,13 @@ export default function App() {
                     >
                         Save and Generate CSS
                     </Button>
+
+                    <Button onClick={handleResetToDefaults}
+                            variant="contained"
+                            startIcon={<RestoreIcon />}
+                    >
+                        Reset to defaults
+                    </Button>
                 </div>
 
                 <TextField
@@ -143,6 +158,17 @@ export default function App() {
                 >
                     <Alert severity="error" variant="filled">
                         Error on copying from clipboard!
+                    </Alert>
+                </Snackbar>
+
+                <Snackbar
+                    open={resetToDef}
+                    autoHideDuration={3500}
+                    onClose={() => setResetToDef(false)}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                >
+                    <Alert severity="info" variant="filled">
+                        Loaded default state!
                     </Alert>
                 </Snackbar>
 
