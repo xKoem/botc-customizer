@@ -1,0 +1,7 @@
+.headerInner {
+    display: flex;
+}
+
+.headerInner img {
+    margin-right: 0.4em;
+}
