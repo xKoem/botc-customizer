@@ -1,5 +1,8 @@
 import {AppBar, Toolbar, Typography} from "@mui/material";
 
+const version = "0.1"
+const cssVersion = "1.0"
+
 export default function Footer() {
     return (
         <AppBar position="static">
@@ -12,6 +15,7 @@ export default function Footer() {
                     }}
                 >
                 </Typography>
+                Darky Customizer {version}, css {cssVersion} Copyright ©2026
             </Toolbar>
         </AppBar>
     );

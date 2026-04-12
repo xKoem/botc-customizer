@@ -1,4 +1,5 @@
-import {AppBar, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Toolbar, Typography} from "@mui/material";
+import "./Header.css"
 
 export default function Header() {
     return (
@@ -11,7 +12,10 @@ export default function Header() {
                         color: 'inherit',
                     }}
                 >
-                    BotC Darky Customizer
+                   <Box className="headerInner">
+                       <img src="botc-customizer/favicon.ico" height="32px"/>
+                       <div>BotC Darky Customizer</div>
+                   </Box>
                 </Typography>
             </Toolbar>
         </AppBar>
