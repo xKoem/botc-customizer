@@ -5,14 +5,14 @@ const INPUT_FILE = "raw_data/styles.css";
 const OUTPUT_FILE = "src/data/templates.ts";
 
 function parseVariables(css) {
-    const regex = /\{\{(\w+)\|([^}]+)\}\}/g;
+    const regex = /\{\{(\w+)(\s*)\|([^}]+)\}\}/g;
     const variables = [];
     const seen = new Set();
 
     let match;
     while ((match = regex.exec(css))) {
-        const key = match[1];
-        const def = match[2];
+        const key = match[1].trim();
+        const def = match[3].trim();
 
         if (!seen.has(key)) {
             seen.add(key);
