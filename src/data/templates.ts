@@ -10,45 +10,63 @@ export const templates: Template[] = [
         "variables": []
     },
     {
-        "key": "disable_pointer_events_on_character_mid",
-        "description": "Disable pointer events for character mid",
-        "cssText": ".team-special.role-dusk,\n.team-special.role-dawn,\n.team-special.role-minioninfo,\n.team-special.role-demoninfo{\n    color:{{color}};\n}",
-        "variables": [
-            {
-                "key": "color",
-                "default": "#ccc"
-            }
-        ]
-    },
-    {
-        "key": "test",
-        "description": "Night order costam",
-        "cssText": ".team-special.role-dusk,\n.team-special.role-dawn,\n.team-special.role-minioninfo,\n.team-special.role-demoninfo{\n    color:{{color}}{{another}}{{andanother}};\n}",
-        "variables": [
-            {
-                "key": "color",
-                "default": "#ccc"
-            },
-            {
-                "key": "another",
-                "default": "some text"
-            },
-            {
-                "key": "andanother",
-                "default": "some more text"
-            }
-        ]
-    },
-    {
-        "key": "another_key",
-        "description": "another lol with more changes",
-        "cssText": ".team-special.role-dusk,\n.team-special.role-dawn,\n.team-special.role-minioninfo,\n.team-special.role-demoninfo{\n    something: lol;\n    another: xd;\n}",
+        "key": "altered_character_colors_filters",
+        "description": "Alter the look of characters",
+        "cssText": ":root {\n  --enabled-filters: invert(1) brightness(0.8) contrast(0.9);\n  --demon-hue: 220deg;\n  --minion-hue: 180deg;\n  --townsfolk-hue: 180deg;\n  --outsider-hue: 220deg;\n  --traveller-hue: 170deg;\n  --fabled-hue: 50deg;\n  --loric-hue: -50deg;\n  --currentcolor: red;\n}\n\n.character.tab .container .team.bootlegger {\n  filter: var(--enabled-filters) hue-rotate(var(--fabled-hue)) saturate(1.6) !important;\n}\n\n.signals .card-demon,\nul.tokens>li.demon {\n  box-shadow: 0 0 10px hsl(calc(180deg + var(--demon-hue)), 100%, 50%) !important;\n}\n\n.team-demon .icon,\n.team-demon .ability b,\n.character ul li .team-demon .icon,\n.character .demon ul .team-demon .icon,\n.characters .demon ul li.demon .icon,\n.characters .demon ul li.demon .name,\n.characters .demon aside,\n.night-reference ul li.demon .icon,\n.night-order.tab .team-demon .icon,\n.night-order.tab .team-demon .name,\n.night-order.tab .team-demon .reminder,\n.character.tab li>.team-demon .icon,\n.character.tab .role>.team-demon .icon,\n.character.tab .team-demon .name,\n.character.tab .team-demon .ability,\n.signals .roles li .team-demon,\n.signals .card-role:has(.demon),\n.signals ul.roles .demon,\n.signals .players.circle li .team-demon,\n.town-info .box td.demon,\n#whispers .messages div b.team-demon,\n.reminder.team-demon>.icon {\n  filter: var(--enabled-filters) hue-rotate(var(--demon-hue)) saturate(1.6) !important;\n}\n\nul.tokens>li.minion {\n  box-shadow: 0 0 10px hsl(calc(140deg + var(--minion-hue)), 100%, 50%) !important;\n}\n\n.team-minion .icon,\n.team-minion .ability b,\n.character ul li .team-minion .icon,\n.character .minion ul .team-minion .icon,\n.characters .minion ul li.minion .icon,\n.characters .minion ul li.minion .name,\n.characters .minion aside,\n.night-reference ul li.minion .icon,\n.night-order.tab .team-minion .icon,\n.night-order.tab .team-minion .name,\n.night-order.tab .team-minion .reminder,\n.character.tab li>.team-minion .icon,\n.character.tab .role>.team-minion .icon,\n.character.tab .team-minion .name,\n.character.tab .team-minion .ability,\n.signals .roles li .team-minion,\n.signals .card-role:has(.minion),\n.signals ul.roles .minion,\n.signals .players.circle li .team-minion,\n.town-info .box td.minion,\n#whispers .messages div b.team-minion,\n.reminder.team-minion>.icon {\n  filter: var(--enabled-filters) hue-rotate(var(--minion-hue)) saturate(1.6) !important;\n}\n\n\nul.tokens>li.townsfolk {\n  box-shadow: 0 0 10px hsl(calc(40deg + var(--townsfolk-hue)), 100%, 50%) !important;\n}\n\n.team-townsfolk .icon,\n.team-townsfolk .ability b,\n.character ul li .team-townsfolk .icon,\n.character .townsfolk ul .team-townsfolk .icon,\n.characters .townsfolk ul li.townsfolk .icon,\n.characters .townsfolk ul li.townsfolk .name,\n.characters .townsfolk aside,\n.night-reference ul li.townsfolk .icon,\n.night-order.tab .team-townsfolk .icon,\n.night-order.tab .team-townsfolk .name,\n.night-order.tab .team-townsfolk .reminder,\n.character.tab li>.team-townsfolk .icon,\n.character.tab .role>.team-townsfolk .icon,\n.character.tab .team-townsfolk .name,\n.character.tab .team-townsfolk .ability,\n.signals .roles li .team-townsfolk,\n.signals .card-townsfolk,\n.signals .card-role:has(.townsfolk),\n.signals ul.roles .townsfolk,\n.signals .players.circle li .team-townsfolk,\n.town-info .box td.townsfolk,\n#whispers .messages div b.team-townsfolk,\n.reminder.team-townsfolk>.icon {\n  filter: var(--enabled-filters) hue-rotate(var(--townsfolk-hue)) saturate(1.6) !important;\n}\n\n\nul.tokens>li.outsider {\n  box-shadow: 0 0 10px hsl(calc(40deg + var(--outsider-hue)), 100%, 50%) !important;\n}\n\n.team-outsider .icon,\n.team-outsider .ability b,\n.character ul li .team-outsider .icon,\n.character .outsider ul .team-outsider .icon,\n.characters .outsider ul li.outsider .icon,\n.characters .outsider ul li.outsider .name,\n.characters .outsider aside,\n.night-reference ul li.outsider .icon,\n.night-order.tab .team-outsider .icon,\n.night-order.tab .team-outsider .name,\n.night-order.tab .team-outsider .reminder,\n.character.tab li>.team-outsider .icon,\n.character.tab .role>.team-outsider .icon,\n.character.tab .team-outsider .name,\n.character.tab .team-outsider .ability,\n.signals .roles li .team-outsider,\n.signals .card-outsider,\n.signals .card-role:has(.outsider),\n.signals ul.roles .outsider,\n.signals .players.circle li .team-outsider,\n.town-info .box td.outsider,\n#whispers .messages div b.team-outsider,\n.reminder.team-outsider>.icon {\n  filter: var(--enabled-filters) hue-rotate(var(--outsider-hue)) saturate(1.6) !important;\n}\n\n\nul.tokens>li.traveller {\n  box-shadow: 0 0 10px hsl(calc(180deg + var(--traveller-hue)), 100%, 50%) !important;\n}\n\n.team-traveller .icon,\n.team-traveller .ability b,\n.character ul li .team-traveller .icon,\n.character .traveller ul .team-traveller .icon,\n.characters .traveller ul li.traveller .icon,\n.characters .traveller ul li.traveller .name,\n.characters .traveller aside,\n.night-reference ul li.traveller .icon,\n.night-order.tab .team-traveller .icon,\n.night-order.tab .team-traveller .name,\n.night-order.tab .team-traveller .reminder,\n.character.tab li>.team-traveller .icon,\n.character.tab .role>.team-traveller .icon,\n.character.tab .team-traveller .name,\n.character.tab .team-traveller .ability,\n.signals .roles li .team-traveller,\n.signals .card-traveller,\n.signals .card-role:has(.traveller),\n.signals ul.roles .traveller,\n.signals .players.circle li .team-traveller,\n.town-info .box td.traveller,\n#whispers .messages div b.team-traveller,\n.reminder.team-traveller>.icon {\n  filter: var(--enabled-filters) hue-rotate(var(--traveller-hue)) saturate(1.6) !important;\n}\n\n\nul.tokens>li.fabled {\n  box-shadow: 0 0 10px hsl(calc(180deg + var(--fabled-hue)), 100%, 50%) !important;\n}\n\n.team-fabled .icon,\n.team-fabled .ability b,\n.character ul li .team-fabled .icon,\n.character .fabled ul .team-fabled .icon,\n.characters .fabled ul li.fabled .icon,\n.characters .fabled ul li.fabled .name,\n.characters .fabled aside,\n.night-reference ul li.fabled .icon,\n.night-order.tab .team-fabled .icon,\n.night-order.tab .team-fabled .name,\n.night-order.tab .team-fabled .reminder,\n.character.tab li>.team-fabled .icon,\n.character.tab .role>.team-fabled .icon,\n.character.tab .team-fabled .name,\n.character.tab .team-fabled .ability,\n.signals .roles li .team-fabled,\n.signals .card-fabled,\n.signals .card-role:has(.fabled),\n.signals ul.roles .fabled,\n.signals .players.circle li .team-fabled,\n.town-info .box td.fabled,\n#whispers .messages div b.team-fabled,\n.reminder.team-fabled>.icon {\n  filter: var(--enabled-filters) hue-rotate(var(--fabled-hue)) saturate(1.6) !important;\n}\n\n\nul.tokens>li.loric {\n  box-shadow: 0 0 10px hsl(calc(180deg + var(--loric-hue)), 100%, 50%) !important;\n}\n\n.team-loric .icon,\n.team-loric .ability b,\n.character ul li .team-loric .icon,\n.character .loric ul .team-loric .icon,\n.characters .loric ul li.loric .icon,\n.characters .loric ul li.loric .name,\n.characters .loric aside,\n.night-reference ul li.loric .icon,\n.night-order.tab .team-loric .icon,\n.night-order.tab .team-loric .name,\n.night-order.tab .team-loric .reminder,\n.character.tab li>.team-loric .icon,\n.character.tab .role>.team-loric .icon,\n.character.tab .team-loric .name,\n.character.tab .team-loric .ability,\n.signals .roles li .team-loric,\n.signals .card-loric,\n.signals .card-role:has(.loric),\n.signals ul.roles .loric,\n.signals .players.circle li .team-loric,\n.town-info .box td.loric,\n#whispers .messages div b.team-loric,\n.reminder.team-loric>.icon {\n  filter: var(--enabled-filters) hue-rotate(var(--loric-hue)) saturate(1.6) !important;\n}\n\n#general-colorblind {\n  text-decoration: underline;\n  visibility: hidden;\n}\n\n#general-colorblind::before{\n  visibility: visible;\n  content:\"Colorblind mode doesn't work with this custom CSS! (sorry)\" !important;\n}\n\n.night-reference ul li .name {\n  filter: none !important;\n}",
         "variables": []
     },
     {
-        "key": "more_keys",
-        "description": "another lol 2",
-        "cssText": ".team-special.role-dusk,\n.team-special.role-dawn,\n.team-special.role-minioninfo,\n.team-special.role-demoninfo{\n    something: lol;\n}",
+        "key": "disable_version_div",
+        "description": "Disable bottom right div for game version",
+        "cssText": "div#version{\n  display:none !important;\n}",
+        "variables": []
+    },
+    {
+        "key": "disable_resizable_div_marker",
+        "description": "Disable bottom right corner div marker for resizable containers",
+        "cssText": ".container.positioned::after{\n  background: none !important;\n}",
+        "variables": []
+    },
+    {
+        "key": "altered_night_cards_character",
+        "description": "Alter the look of night cards related to sending script characters",
+        "cssText": ".signals .card-role .icon {\n  filter: {{filter | drop-shadow(0 0 0)}} !important;\n}\n\n\nul.log li.message .card-role {\n  border: {{border | 2px solid black}} !important;\n}",
+        "variables": []
+    },
+    {
+        "key": "alter_good_alignment_color",
+        "description": "Change the color of the good alignment when hovering players as ST",
+        "cssText": ".good {\n  color: {{color | darkcyan}} !important;\n}",
+        "variables": []
+    },
+    {
+        "key": "alter_evil_alignment_color",
+        "description": "Change the color of the evil alignment when hovering players as ST",
+        "cssText": ".evil {\n  color: {{color | pink}} !important;\n}",
+        "variables": []
+    },
+    {
+        "key": "disable_pop_out_tab_buttons",
+        "description": "Remove buttons for tabs when they're popped out",
+        "cssText": "aside.tab:has(div.positioned){\n  visibility: hidden;\n}\n\ndiv.positioned{\n  visibility: visible;\n}",
+        "variables": []
+    },
+    {
+        "key": "disable_voice_chat_background",
+        "description": "Disable voice chat background, border and unnecessary vc button",
+        "cssText": "div#tab-chat{\n  background: none;\n  border:none;\n}\n\ndiv#tab-chat>footer>div.button{\n  display: none;\n}",
+        "variables": []
+    },
+    {
+        "key": "disable_text_chat_background",
+        "description": "Disable text chat background, border",
+        "cssText": "div#tab-text {\n  text-shadow: none !important;\n  background: none !important;\n  border: none ;\n}\n\ndiv#tab-text *{\n  border:none ;\n}",
+        "variables": []
+    },
+    {
+        "key": "enable_papiesz",
+        "description": "Pope",
+        "cssText": ".role-pope > span {\n  background-image: url(\"https://data4.cupsell.pl/upload/generator/247026/640x420/4837205_print_1.png\") !important;\n  background-size: 50% !important;\n  background-repeat: no-repeat !important;\n}",
         "variables": []
     }
 ];

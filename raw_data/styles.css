@@ -11,46 +11,377 @@ Disable script name
 }
 
 /*
-disable_pointer_events_on_character_mid
-Disable pointer events for character mid
+altered_character_colors_filters
+Alter the look of characters 
 */
-.team-special.role-dusk,
-.team-special.role-dawn,
-.team-special.role-minioninfo,
-.team-special.role-demoninfo{
-    color:{{color|#ccc}};
+:root {
+  --enabled-filters: invert(1) brightness(0.8) contrast(0.9);
+  --demon-hue: 220deg;
+  --minion-hue: 180deg;
+  --townsfolk-hue: 180deg;
+  --outsider-hue: 220deg;
+  --traveller-hue: 170deg;
+  --fabled-hue: 50deg;
+  --loric-hue: -50deg;
+  --currentcolor: red;
+}
+
+.character.tab .container .team.bootlegger {
+  filter: var(--enabled-filters) hue-rotate(var(--fabled-hue)) saturate(1.6) !important;
+}
+
+.signals .card-demon,
+ul.tokens>li.demon {
+  box-shadow: 0 0 10px hsl(calc(180deg + var(--demon-hue)), 100%, 50%) !important;
+}
+
+.team-demon .icon,
+.team-demon .ability b,
+.character ul li .team-demon .icon,
+.character .demon ul .team-demon .icon,
+.characters .demon ul li.demon .icon,
+.characters .demon ul li.demon .name,
+.characters .demon aside,
+.night-reference ul li.demon .icon,
+.night-order.tab .team-demon .icon,
+.night-order.tab .team-demon .name,
+.night-order.tab .team-demon .reminder,
+.character.tab li>.team-demon .icon,
+.character.tab .role>.team-demon .icon,
+.character.tab .team-demon .name,
+.character.tab .team-demon .ability,
+.signals .roles li .team-demon,
+.signals .card-role:has(.demon),
+.signals ul.roles .demon,
+.signals .players.circle li .team-demon,
+.town-info .box td.demon,
+#whispers .messages div b.team-demon,
+.reminder.team-demon>.icon {
+  filter: var(--enabled-filters) hue-rotate(var(--demon-hue)) saturate(1.6) !important;
+}
+
+ul.tokens>li.minion {
+  box-shadow: 0 0 10px hsl(calc(140deg + var(--minion-hue)), 100%, 50%) !important;
+}
+
+.team-minion .icon,
+.team-minion .ability b,
+.character ul li .team-minion .icon,
+.character .minion ul .team-minion .icon,
+.characters .minion ul li.minion .icon,
+.characters .minion ul li.minion .name,
+.characters .minion aside,
+.night-reference ul li.minion .icon,
+.night-order.tab .team-minion .icon,
+.night-order.tab .team-minion .name,
+.night-order.tab .team-minion .reminder,
+.character.tab li>.team-minion .icon,
+.character.tab .role>.team-minion .icon,
+.character.tab .team-minion .name,
+.character.tab .team-minion .ability,
+.signals .roles li .team-minion,
+.signals .card-role:has(.minion),
+.signals ul.roles .minion,
+.signals .players.circle li .team-minion,
+.town-info .box td.minion,
+#whispers .messages div b.team-minion,
+.reminder.team-minion>.icon {
+  filter: var(--enabled-filters) hue-rotate(var(--minion-hue)) saturate(1.6) !important;
+}
+
+
+ul.tokens>li.townsfolk {
+  box-shadow: 0 0 10px hsl(calc(40deg + var(--townsfolk-hue)), 100%, 50%) !important;
+}
+
+.team-townsfolk .icon,
+.team-townsfolk .ability b,
+.character ul li .team-townsfolk .icon,
+.character .townsfolk ul .team-townsfolk .icon,
+.characters .townsfolk ul li.townsfolk .icon,
+.characters .townsfolk ul li.townsfolk .name,
+.characters .townsfolk aside,
+.night-reference ul li.townsfolk .icon,
+.night-order.tab .team-townsfolk .icon,
+.night-order.tab .team-townsfolk .name,
+.night-order.tab .team-townsfolk .reminder,
+.character.tab li>.team-townsfolk .icon,
+.character.tab .role>.team-townsfolk .icon,
+.character.tab .team-townsfolk .name,
+.character.tab .team-townsfolk .ability,
+.signals .roles li .team-townsfolk,
+.signals .card-townsfolk,
+.signals .card-role:has(.townsfolk),
+.signals ul.roles .townsfolk,
+.signals .players.circle li .team-townsfolk,
+.town-info .box td.townsfolk,
+#whispers .messages div b.team-townsfolk,
+.reminder.team-townsfolk>.icon {
+  filter: var(--enabled-filters) hue-rotate(var(--townsfolk-hue)) saturate(1.6) !important;
+}
+
+
+ul.tokens>li.outsider {
+  box-shadow: 0 0 10px hsl(calc(40deg + var(--outsider-hue)), 100%, 50%) !important;
+}
+
+.team-outsider .icon,
+.team-outsider .ability b,
+.character ul li .team-outsider .icon,
+.character .outsider ul .team-outsider .icon,
+.characters .outsider ul li.outsider .icon,
+.characters .outsider ul li.outsider .name,
+.characters .outsider aside,
+.night-reference ul li.outsider .icon,
+.night-order.tab .team-outsider .icon,
+.night-order.tab .team-outsider .name,
+.night-order.tab .team-outsider .reminder,
+.character.tab li>.team-outsider .icon,
+.character.tab .role>.team-outsider .icon,
+.character.tab .team-outsider .name,
+.character.tab .team-outsider .ability,
+.signals .roles li .team-outsider,
+.signals .card-outsider,
+.signals .card-role:has(.outsider),
+.signals ul.roles .outsider,
+.signals .players.circle li .team-outsider,
+.town-info .box td.outsider,
+#whispers .messages div b.team-outsider,
+.reminder.team-outsider>.icon {
+  filter: var(--enabled-filters) hue-rotate(var(--outsider-hue)) saturate(1.6) !important;
+}
+
+
+ul.tokens>li.traveller {
+  box-shadow: 0 0 10px hsl(calc(180deg + var(--traveller-hue)), 100%, 50%) !important;
+}
+
+.team-traveller .icon,
+.team-traveller .ability b,
+.character ul li .team-traveller .icon,
+.character .traveller ul .team-traveller .icon,
+.characters .traveller ul li.traveller .icon,
+.characters .traveller ul li.traveller .name,
+.characters .traveller aside,
+.night-reference ul li.traveller .icon,
+.night-order.tab .team-traveller .icon,
+.night-order.tab .team-traveller .name,
+.night-order.tab .team-traveller .reminder,
+.character.tab li>.team-traveller .icon,
+.character.tab .role>.team-traveller .icon,
+.character.tab .team-traveller .name,
+.character.tab .team-traveller .ability,
+.signals .roles li .team-traveller,
+.signals .card-traveller,
+.signals .card-role:has(.traveller),
+.signals ul.roles .traveller,
+.signals .players.circle li .team-traveller,
+.town-info .box td.traveller,
+#whispers .messages div b.team-traveller,
+.reminder.team-traveller>.icon {
+  filter: var(--enabled-filters) hue-rotate(var(--traveller-hue)) saturate(1.6) !important;
+}
+
+
+ul.tokens>li.fabled {
+  box-shadow: 0 0 10px hsl(calc(180deg + var(--fabled-hue)), 100%, 50%) !important;
+}
+
+.team-fabled .icon,
+.team-fabled .ability b,
+.character ul li .team-fabled .icon,
+.character .fabled ul .team-fabled .icon,
+.characters .fabled ul li.fabled .icon,
+.characters .fabled ul li.fabled .name,
+.characters .fabled aside,
+.night-reference ul li.fabled .icon,
+.night-order.tab .team-fabled .icon,
+.night-order.tab .team-fabled .name,
+.night-order.tab .team-fabled .reminder,
+.character.tab li>.team-fabled .icon,
+.character.tab .role>.team-fabled .icon,
+.character.tab .team-fabled .name,
+.character.tab .team-fabled .ability,
+.signals .roles li .team-fabled,
+.signals .card-fabled,
+.signals .card-role:has(.fabled),
+.signals ul.roles .fabled,
+.signals .players.circle li .team-fabled,
+.town-info .box td.fabled,
+#whispers .messages div b.team-fabled,
+.reminder.team-fabled>.icon {
+  filter: var(--enabled-filters) hue-rotate(var(--fabled-hue)) saturate(1.6) !important;
+}
+
+
+ul.tokens>li.loric {
+  box-shadow: 0 0 10px hsl(calc(180deg + var(--loric-hue)), 100%, 50%) !important;
+}
+
+.team-loric .icon,
+.team-loric .ability b,
+.character ul li .team-loric .icon,
+.character .loric ul .team-loric .icon,
+.characters .loric ul li.loric .icon,
+.characters .loric ul li.loric .name,
+.characters .loric aside,
+.night-reference ul li.loric .icon,
+.night-order.tab .team-loric .icon,
+.night-order.tab .team-loric .name,
+.night-order.tab .team-loric .reminder,
+.character.tab li>.team-loric .icon,
+.character.tab .role>.team-loric .icon,
+.character.tab .team-loric .name,
+.character.tab .team-loric .ability,
+.signals .roles li .team-loric,
+.signals .card-loric,
+.signals .card-role:has(.loric),
+.signals ul.roles .loric,
+.signals .players.circle li .team-loric,
+.town-info .box td.loric,
+#whispers .messages div b.team-loric,
+.reminder.team-loric>.icon {
+  filter: var(--enabled-filters) hue-rotate(var(--loric-hue)) saturate(1.6) !important;
+}
+
+#general-colorblind {
+  text-decoration: underline;
+  visibility: hidden;
+}
+
+#general-colorblind::before{
+  visibility: visible;
+  content:"Colorblind mode doesn't work with this custom CSS! (sorry)" !important;
+}
+
+.night-reference ul li .name {
+  filter: none !important;
 }
 
 /*
-test
-Night order costam
+disable_version_div
+Disable bottom right div for game version
 */
-.team-special.role-dusk,
-.team-special.role-dawn,
-.team-special.role-minioninfo,
-.team-special.role-demoninfo{
-    color:{{color|#ccc}}{{another|some text}}{{andanother|some more text}};
+div#version{
+  display:none !important;
 }
 
 /*
-another_key
-another lol with more changes
+disable_resizable_div_marker
+Disable bottom right corner div marker for resizable containers
 */
-.team-special.role-dusk,
-.team-special.role-dawn,
-.team-special.role-minioninfo,
-.team-special.role-demoninfo{
-    something: lol;
-    another: xd;
+.container.positioned::after{
+  background: none !important;
 }
 
 /*
-more_keys
-another lol 2
+altered_night_cards_character
+Alter the look of night cards related to sending script characters
 */
-.team-special.role-dusk,
-.team-special.role-dawn,
-.team-special.role-minioninfo,
-.team-special.role-demoninfo{
-    something: lol;
+.signals .card-role .icon {
+  filter: {{filter | drop-shadow(0 0 0)}} !important;
 }
+
+
+ul.log li.message .card-role {
+  border: {{border | 2px solid black}} !important;
+}
+
+
+/*
+alter_good_alignment_color
+Change the color of the good alignment when hovering players as ST
+*/
+.good {
+  color: {{color | darkcyan}} !important;
+}
+
+/*
+alter_evil_alignment_color
+Change the color of the evil alignment when hovering players as ST
+*/
+.evil {
+  color: {{color | pink}} !important;
+}
+
+/*
+disable_pop_out_tab_buttons
+Remove buttons for tabs when they're popped out
+*/
+aside.tab:has(div.positioned){
+  visibility: hidden;
+}
+
+div.positioned{
+  visibility: visible;
+}
+
+/*
+disable_voice_chat_background
+Disable voice chat background, border and unnecessary vc button
+*/
+div#tab-chat{
+  background: none;
+  border:none;
+}
+
+div#tab-chat>footer>div.button{
+  display: none;
+} 
+
+
+/*
+disable_text_chat_background
+Disable text chat background, border
+*/
+div#tab-text {
+  text-shadow: none !important;
+  background: none !important;
+  border: none ;
+}
+
+div#tab-text *{
+  border:none ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+enable_papiesz
+Pope
+*/
+.role-pope > span {
+  background-image: url("https://data4.cupsell.pl/upload/generator/247026/640x420/4837205_print_1.png") !important;
+  background-size: 50% !important;
+  background-repeat: no-repeat !important;
+}
+
