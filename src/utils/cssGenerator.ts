@@ -1,5 +1,8 @@
 import {Template, TemplateState} from "../types/types";
 
+const cssConfigStart = "/*Start of JSON config - do not remove"
+const cssConfigEnd = "End of JSON config - do not remove*/"
+
 export function applyVariables(
     css: string,
     vars: Record<string, string>
@@ -18,9 +21,7 @@ export function generateCSS(
     state: TemplateState[],
     templates: Template[]
 ) {
-    const initialConfig = `/*Start of JSON config - do not remove\n${JSON.stringify(
-        state
-    )}\nEnd of JSON config - do not remove*/`;
+    const initialConfig = `${cssConfigStart}\n${JSON.stringify(state)}\n${cssConfigEnd}`;
 
     let finalCSS = `${initialConfig}\n\n`;
 
@@ -35,4 +36,10 @@ export function generateCSS(
         });
 
     return finalCSS;
+}
+
+export function extractJsonConfig(css: string) {
+    return css.split(cssConfigEnd)
+        .at(0)
+        ?.replace(cssConfigStart, "").trim() || ""
 }

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { templates } from "./data/templates";
 import { TemplateState } from "./types/types";
-import { generateCSS } from "./utils/cssGenerator";
+import {extractJsonConfig, generateCSS} from "./utils/cssGenerator";
 import { Button, Box, TextField } from "@mui/material";
 import Item from "./components/Item";
 import { Snackbar, Alert } from "@mui/material";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import {mapFromSavedJsonToConfig} from "./Helpers";
 
 export default function App() {
     const [state, setState] = useState<TemplateState[]>([]);
@@ -14,21 +15,6 @@ export default function App() {
     const [copied, setCopied] = useState(false);
     const [errorOnClipboard, setErrorOnClipboard] = useState(false);
     const [loadedFromClipboard, setLoadedFromClipboard] = useState(false);
-
-    const mapFromSavedJsonToConfig = (json: any)=> {
-        return templates.map(t => ({
-            key: t.key,
-            enabled: json.find((s: any) => s.key === t.key)?.enabled ?? true,
-            variables: Object.fromEntries(
-                t.variables?.map(v => [
-                    v.key,
-                    json.find((s: any) => s.key === t.key)?.variables?.[v.key] ??
-                    v.default ??
-                    ""
-                ]) ?? []
-            )
-        }));
-    }
 
     useEffect(() => {
         const saved = JSON.parse(localStorage.getItem("cssConfig") || "[]");
@@ -68,12 +54,6 @@ export default function App() {
             }
         })
     };
-
-    const extractJsonConfig = (css: string): string => {
-        return css.split("End of JSON config - do not remove*/")
-            .at(0)
-            ?.replace("/*Start of JSON config - do not remove", "").trim() || ""
-    }
 
     return (
         <div className="main">
