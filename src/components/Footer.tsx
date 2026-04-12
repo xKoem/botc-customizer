@@ -1,22 +1,31 @@
-import {AppBar, Toolbar, Typography} from "@mui/material";
+import {Container, CssBaseline, Link, Typography} from "@mui/material";
+import './Footer.css'
 
-const version = "0.1"
-const cssVersion = "1.0"
+function Copyright() {
+    return (
+        <Typography variant="body2" color="textSecondary">
+            {"Copyright © Darky Customizer "}
+            {new Date().getFullYear()}
+            {". "}
+            <Link color="inherit" href="https://github.com/xKoem/botc-customizer/issues">
+                Report Issues
+            </Link>
+        </Typography>
+    );
+}
 
 export default function Footer() {
     return (
-        <AppBar position="static">
-            <Toolbar variant="dense">
-                <Typography
-                    variant="subtitle2"
-                    component="div"
-                    sx={{
-                        color: 'inherit',
-                    }}
-                >
-                </Typography>
-                Darky Customizer {version}, css {cssVersion} Copyright ©2026
-            </Toolbar>
-        </AppBar>
+        <div className="footer-container">
+            <CssBaseline />
+            <footer className="footer">
+                <Container>
+                    <Typography variant="subtitle2" color="textSecondary">
+                        This website is a fan-made project created for non-commercial purposes. It is not affiliated with, endorsed by, or associated with The Pandemonium Institute, the creators of Blood on the Clocktower.
+                    </Typography>
+                    <Copyright />
+                </Container>
+            </footer>
+        </div>
     );
 }
