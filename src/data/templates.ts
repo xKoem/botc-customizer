@@ -30,20 +30,39 @@ export const templates: Template[] = [
     {
         "key": "altered_night_cards_character",
         "description": "Alter the look of night cards related to sending script characters",
-        "cssText": ".signals .card-role .icon {\n  filter: {{filter | drop-shadow(0 0 0)}} !important;\n}\n\n\nul.log li.message .card-role {\n  border: {{border | 2px solid black}} !important;\n}",
-        "variables": []
+        "cssText": ".signals .card-role .icon {\n  filter: {{filter}} !important;\n}\n\n\nul.log li.message .card-role {\n  border: {{border}} !important;\n}",
+        "variables": [
+            {
+                "key": "filter",
+                "default": ""
+            },
+            {
+                "key": "border",
+                "default": ""
+            }
+        ]
     },
     {
         "key": "alter_good_alignment_color",
         "description": "Change the color of the good alignment when hovering players as ST",
-        "cssText": ".good {\n  color: {{color | darkcyan}} !important;\n}",
-        "variables": []
+        "cssText": ".good {\n  color: {{color}} !important;\n}",
+        "variables": [
+            {
+                "key": "color",
+                "default": ""
+            }
+        ]
     },
     {
         "key": "alter_evil_alignment_color",
         "description": "Change the color of the evil alignment when hovering players as ST",
-        "cssText": ".evil {\n  color: {{color | pink}} !important;\n}",
-        "variables": []
+        "cssText": ".evil {\n  color: {{color}} !important;\n}",
+        "variables": [
+            {
+                "key": "color",
+                "default": ""
+            }
+        ]
     },
     {
         "key": "disable_pop_out_tab_buttons",
