@@ -34,11 +34,11 @@ export const templates: Template[] = [
         "variables": [
             {
                 "key": "filter",
-                "default": ""
+                "default": "drop-shadow(0 0 0)"
             },
             {
                 "key": "border",
-                "default": ""
+                "default": "2px solid black"
             }
         ]
     },
@@ -49,7 +49,7 @@ export const templates: Template[] = [
         "variables": [
             {
                 "key": "color",
-                "default": ""
+                "default": "darkcyan"
             }
         ]
     },
@@ -60,7 +60,7 @@ export const templates: Template[] = [
         "variables": [
             {
                 "key": "color",
-                "default": ""
+                "default": "pink"
             }
         ]
     },
