@@ -4,7 +4,9 @@ import "./Header.css"
 export default function Header() {
     return (
         <AppBar position="static">
-            <Toolbar variant="dense">
+            <Toolbar variant="dense"
+                     sx={{ justifyContent: 'center' }}
+            >
                 <Typography
                     variant="h5"
                     component="div"

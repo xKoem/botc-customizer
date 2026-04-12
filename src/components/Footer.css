@@ -1,0 +1,13 @@
+.footer-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-main {
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+}
+
+.footer {
+    padding: 0.4em;
+}

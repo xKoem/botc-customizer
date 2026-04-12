@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { templates } from "./data/templates";
 import { TemplateState } from "./types/types";
 import {extractJsonConfig, generateCSS} from "./utils/cssGenerator";
-import { Button, Box, TextField } from "@mui/material";
+import {Button, Box, TextField, Container} from "@mui/material";
 import Item from "./components/Item";
 import { Snackbar, Alert } from "@mui/material";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import {mapFromSavedJsonToConfig} from "./Helpers";
+import SaveIcon from '@mui/icons-material/Save';
+import UploadIcon from '@mui/icons-material/Upload';
+
 
 export default function App() {
     const [state, setState] = useState<TemplateState[]>([]);
@@ -58,6 +61,7 @@ export default function App() {
     return (
         <div className="main">
             <Header/>
+            <Container maxWidth="md">
             <Box p={3}>
                 {templates.map(template => {
                     const current = state.find(s => s.key === template.key);
@@ -86,11 +90,17 @@ export default function App() {
                 })}
 
                 <div className="buttons">
-                    <Button onClick={handleFromClipboard} variant="contained">
+                    <Button onClick={handleFromClipboard}
+                            variant="contained"
+                            startIcon={<UploadIcon />}
+                    >
                         Load old config from clipboard
                     </Button>
 
-                    <Button onClick={handleGenerate} variant="contained">
+                    <Button onClick={handleGenerate}
+                            variant="contained"
+                            startIcon={<SaveIcon />}
+                    >
                         Save and Generate CSS
                     </Button>
                 </div>
@@ -138,7 +148,8 @@ export default function App() {
 
             </Box>
             <Footer/>
-        </div>
 
+            </Container>
+        </div>
     );
 }
