@@ -12,7 +12,7 @@ function parseVariables(css) {
     let match;
     while ((match = regex.exec(css))) {
         const key = match[1].trim();
-        const def = match[2].trim();
+        const def = match[3].trim();
 
         if (!seen.has(key)) {
             seen.add(key);
