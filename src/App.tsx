@@ -5,6 +5,8 @@ import { generateCSS } from "./utils/cssGenerator";
 import { Button, Box, TextField } from "@mui/material";
 import Item from "./components/Item";
 import { Snackbar, Alert } from "@mui/material";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 export default function App() {
     const [state, setState] = useState<TemplateState[]>([]);
@@ -46,55 +48,61 @@ export default function App() {
     };
 
     return (
-        <Box p={3}>
-            {templates.map(template => {
-                const current = state.find(s => s.key === template.key);
-                if (!current) return null;
+        <div>
+            <Header/>
+            <Box p={3}>
+                {templates.map(template => {
+                    const current = state.find(s => s.key === template.key);
+                    if (!current) return null;
 
-                return (
-                    <Item
-                        key={template.key}
-                        template={template}
-                        state={current}
-                        onToggle={() =>
-                            updateTemplate(template.key, {
-                                enabled: !current.enabled
-                            })
-                        }
-                        onChangeVar={(varKey, value) =>
-                            updateTemplate(template.key, {
-                                variables: {
-                                    ...current.variables,
-                                    [varKey]: value
-                                }
-                            })
-                        }
-                    />
-                );
-            })}
+                    return (
+                        <Item
+                            key={template.key}
+                            template={template}
+                            state={current}
+                            onToggle={() =>
+                                updateTemplate(template.key, {
+                                    enabled: !current.enabled
+                                })
+                            }
+                            onChangeVar={(varKey, value) =>
+                                updateTemplate(template.key, {
+                                    variables: {
+                                        ...current.variables,
+                                        [varKey]: value
+                                    }
+                                })
+                            }
+                        />
+                    );
+                })}
 
-            <Button onClick={handleGenerate} variant="contained">
-                Save and Generate CSS
-            </Button>
+                <Button onClick={handleGenerate} variant="contained">
+                    Save and Generate CSS
+                </Button>
 
-            <TextField
-                multiline
-                rows={10}
-                fullWidth
-                value={cssTestValue}
-                sx={{ mt: 2 }}
-            />
+                <TextField
+                    multiline
+                    rows={10}
+                    fullWidth
+                    value={cssTestValue}
+                    sx={{ mt: 2 }}
+                />
 
-            <Snackbar
-                open={copied}
-                autoHideDuration={1500}
-                onClose={() => setCopied(false)}
-                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-            >
-                <Alert severity="success" variant="filled">
-                    Copied to clipboard!
-                </Alert>
-            </Snackbar>
-        </Box>
+                <Snackbar
+                    open={copied}
+                    autoHideDuration={1500}
+                    onClose={() => setCopied(false)}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                >
+                    <Alert severity="success" variant="filled">
+                        Copied to clipboard!
+                    </Alert>
+                </Snackbar>
+
+            </Box>
+            <Footer/>
+        </div>
+
     );
 }
