@@ -15,3 +15,8 @@ export interface TemplateState {
     enabled: boolean;
     variables: Record<string, string>;
 }
+
+export interface Separator {
+    beforeKey: string;
+    description: string;
+}

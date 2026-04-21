@@ -11,6 +11,9 @@ import {mapFromSavedJsonToConfig} from "./Helpers";
 import SaveIcon from '@mui/icons-material/Save';
 import UploadIcon from '@mui/icons-material/Upload';
 import RestoreIcon from '@mui/icons-material/Restore';
+import {separators} from "./data/separators";
+import ItemSeparator from "./components/ItemSeparator";
+import React from "react";
 
 
 
@@ -72,28 +75,34 @@ export default function App() {
             <Container maxWidth="md">
             <Box p={3}>
                 {templates.map(template => {
+                    const separator = separators.find(x => x.beforeKey === template.key);
                     const current = state.find(s => s.key === template.key);
                     if (!current) return null;
 
                     return (
-                        <Item
-                            key={template.key}
-                            template={template}
-                            state={current}
-                            onToggle={() =>
-                                updateTemplate(template.key, {
-                                    enabled: !current.enabled
-                                })
-                            }
-                            onChangeVar={(varKey, value) =>
-                                updateTemplate(template.key, {
-                                    variables: {
-                                        ...current.variables,
-                                        [varKey]: value
-                                    }
-                                })
-                            }
-                        />
+                        <React.Fragment key={template.key}>
+                            {separator && (
+                                <ItemSeparator separator={separator} />
+                            )}
+
+                            <Item
+                                template={template}
+                                state={current}
+                                onToggle={() =>
+                                    updateTemplate(template.key, {
+                                        enabled: !current.enabled
+                                    })
+                                }
+                                onChangeVar={(varKey, value) =>
+                                    updateTemplate(template.key, {
+                                        variables: {
+                                            ...current.variables,
+                                            [varKey]: value
+                                        }
+                                    })
+                                }
+                            />
+                        </React.Fragment>
                     );
                 })}
 
