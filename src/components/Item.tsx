@@ -19,7 +19,7 @@ export default function Item({
     return (
         <div className="item-container">
             <FormControlLabel control={<Checkbox checked={state.enabled} onChange={onToggle}/>}
-                                  label={template.description} />
+                                  label={template.description} className={state.key}/>
             {state.isNew && <Chip label="New" size="small" color="default" />}
             <div className={"item-variables"}>
                 {template.variables?.map(v => (
