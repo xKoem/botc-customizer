@@ -1,4 +1,4 @@
-import {Template, TemplateState, TemplateStateForCss} from "../types/types";
+import {Template, TemplateStateForCss} from "../types/types";
 
 const cssConfigStart = "/*Start of JSON config - do not remove"
 const cssConfigEnd = "End of JSON config - do not remove*/"
