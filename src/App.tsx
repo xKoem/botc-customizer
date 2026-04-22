@@ -38,9 +38,11 @@ export default function App() {
     };
 
     const handleGenerate = () => {
-        const css = generateCSS(state, templates);
+        const stateForCss = state.map(({ isNew, ...rest }) => rest);
+
+        const css = generateCSS(stateForCss, templates);
         setCssValue(css);
-        localStorage.setItem("cssConfig", JSON.stringify(state));
+        localStorage.setItem("cssConfig", JSON.stringify(stateForCss));
         navigator.clipboard.writeText(css).then(r => {
             setCopied(true);
         });
