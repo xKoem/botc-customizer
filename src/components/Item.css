@@ -8,3 +8,7 @@
     flex-wrap: wrap;
     margin-right: 0.2em;
 }
+
+.enable_papiesz > span:first-of-type {
+    color: #edc62d;
+}
