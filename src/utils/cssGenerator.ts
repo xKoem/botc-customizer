@@ -1,4 +1,4 @@
-import {Template, TemplateState} from "../types/types";
+import {Template, TemplateState, TemplateStateForCss} from "../types/types";
 
 const cssConfigStart = "/*Start of JSON config - do not remove"
 const cssConfigEnd = "End of JSON config - do not remove*/"
@@ -18,7 +18,7 @@ export function applyVariables(
 }
 
 export function generateCSS(
-    state: TemplateState[],
+    state: TemplateStateForCss[],
     templates: Template[]
 ) {
     const initialConfig = `${cssConfigStart}\n${JSON.stringify(state)}\n${cssConfigEnd}`;

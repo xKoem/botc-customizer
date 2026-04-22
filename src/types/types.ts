@@ -12,6 +12,18 @@ export interface Template {
 
 export interface TemplateState {
     key: string;
+    isNew: boolean;
     enabled: boolean;
     variables: Record<string, string>;
+}
+
+export interface TemplateStateForCss {
+    key: string;
+    enabled: boolean;
+    variables: Record<string, string>;
+}
+
+export interface Separator {
+    beforeKey: string;
+    description: string;
 }

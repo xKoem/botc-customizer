@@ -1,6 +1,7 @@
 import {Checkbox, TextField, FormControlLabel} from "@mui/material";
 import { Template, TemplateState } from "../types/types";
 import './Item.css'
+import { Chip } from "@mui/material";
 
 interface Props {
     template: Template;
@@ -19,6 +20,7 @@ export default function Item({
         <div className="item-container">
             <FormControlLabel control={<Checkbox checked={state.enabled} onChange={onToggle}/>}
                                   label={template.description} />
+            {state.isNew && <Chip label="New" size="small" color="default" />}
             <div className={"item-variables"}>
                 {template.variables?.map(v => (
                     <TextField
