@@ -15,8 +15,6 @@ import {separators} from "./data/separators";
 import ItemSeparator from "./components/ItemSeparator";
 import React from "react";
 
-
-
 export default function App() {
     const [state, setState] = useState<TemplateState[]>([]);
     const [cssValue, setCssValue] = useState("");
@@ -67,7 +65,16 @@ export default function App() {
     };
 
     const handleResetToDefaults = () => {
-        setState(mapFromSavedJsonToConfig([]));
+        const defaultState: TemplateState[] = templates.map((template) => ({
+            key: template.key,
+            isNew: false,
+            enabled: true,
+            variables: Object.fromEntries(
+                (template.variables ?? []).map(v => [v.key, v.default])
+            )
+        }));
+
+        setState(defaultState);
         setResetToDef(true);
     };
 
@@ -168,7 +175,7 @@ export default function App() {
                     anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 >
                     <Alert severity="error" variant="filled">
-                        Error on copying from clipboard!
+                        Error on loading from clipboard!
                     </Alert>
                 </Snackbar>
 
