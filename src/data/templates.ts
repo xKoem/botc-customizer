@@ -84,7 +84,7 @@ export const templates: Template[] = [
     },
     {
         "key": "enable_papiesz",
-        "description": "Pope",
+        "description": "Better Pope",
         "cssText": ".role-pope > span {\n  background-image: url(\"https://data4.cupsell.pl/upload/generator/247026/640x420/4837205_print_1.png\") !important;\n  background-size: 50% !important;\n  background-repeat: no-repeat !important;\n}",
         "variables": []
     }
