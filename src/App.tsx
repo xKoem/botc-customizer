@@ -14,6 +14,7 @@ import RestoreIcon from '@mui/icons-material/Restore';
 import {separators} from "./data/separators";
 import ItemSeparator from "./components/ItemSeparator";
 import React from "react";
+import UsageDescription from "./components/UsageDescription";
 
 export default function App() {
     const [state, setState] = useState<TemplateState[]>([]);
@@ -82,116 +83,118 @@ export default function App() {
         <div className="main">
             <Header/>
             <Container maxWidth="md">
-            <Box p={3}>
-                {templates.map(template => {
-                    const separator = separators.find(x => x.beforeKey === template.key);
-                    const current = state.find(s => s.key === template.key);
-                    if (!current) return null;
+                <Box p={1}>
+                    {templates.map(template => {
+                        const separator = separators.find(x => x.beforeKey === template.key);
+                        const current = state.find(s => s.key === template.key);
+                        if (!current) return null;
 
-                    return (
-                        <React.Fragment key={template.key}>
-                            {separator && (
-                                <ItemSeparator separator={separator} />
-                            )}
+                        return (
+                            <React.Fragment key={template.key}>
+                                {separator && (
+                                    <ItemSeparator separator={separator} />
+                                )}
 
-                            <Item
-                                template={template}
-                                state={current}
-                                onToggle={() =>
-                                    updateTemplate(template.key, {
-                                        enabled: !current.enabled
-                                    })
-                                }
-                                onChangeVar={(varKey, value) =>
-                                    updateTemplate(template.key, {
-                                        variables: {
-                                            ...current.variables,
-                                            [varKey]: value
-                                        }
-                                    })
-                                }
-                            />
-                        </React.Fragment>
-                    );
-                })}
+                                <Item
+                                    template={template}
+                                    state={current}
+                                    onToggle={() =>
+                                        updateTemplate(template.key, {
+                                            enabled: !current.enabled
+                                        })
+                                    }
+                                    onChangeVar={(varKey, value) =>
+                                        updateTemplate(template.key, {
+                                            variables: {
+                                                ...current.variables,
+                                                [varKey]: value
+                                            }
+                                        })
+                                    }
+                                />
+                            </React.Fragment>
+                        );
+                    })}
 
-                <div className="buttons">
-                    <Button onClick={handleFromClipboard}
-                            variant="contained"
-                            startIcon={<UploadIcon />}
+                    <div className="buttons">
+                        <Button onClick={handleFromClipboard}
+                                variant="contained"
+                                startIcon={<UploadIcon />}
+                        >
+                            Load old config from clipboard
+                        </Button>
+
+                        <Button onClick={handleGenerate}
+                                variant="contained"
+                                startIcon={<SaveIcon />}
+                        >
+                            Save and Generate CSS
+                        </Button>
+
+                        <Button onClick={handleResetToDefaults}
+                                variant="contained"
+                                startIcon={<RestoreIcon />}
+                        >
+                            Reset to defaults
+                        </Button>
+                    </div>
+
+                    <TextField
+                        multiline
+                        rows={10}
+                        fullWidth
+                        value={cssValue}
+                        sx={{ mt: 2 }}
+                    />
+
+                    <Snackbar
+                        open={copied}
+                        autoHideDuration={2500}
+                        onClose={() => setCopied(false)}
+                        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                     >
-                        Load old config from clipboard
-                    </Button>
+                        <Alert severity="success" variant="filled">
+                            Copied to clipboard!
+                        </Alert>
+                    </Snackbar>
 
-                    <Button onClick={handleGenerate}
-                            variant="contained"
-                            startIcon={<SaveIcon />}
+                    <Snackbar
+                        open={loadedFromClipboard}
+                        autoHideDuration={3500}
+                        onClose={() => setLoadedFromClipboard(false)}
+                        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                     >
-                        Save and Generate CSS
-                    </Button>
+                        <Alert severity="success" variant="filled">
+                            Config loaded from clipboard!
+                        </Alert>
+                    </Snackbar>
 
-                    <Button onClick={handleResetToDefaults}
-                            variant="contained"
-                            startIcon={<RestoreIcon />}
+                    <Snackbar
+                        open={errorOnClipboard}
+                        autoHideDuration={3500}
+                        onClose={() => setErrorOnClipboard(false)}
+                        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                     >
-                        Reset to defaults
-                    </Button>
-                </div>
+                        <Alert severity="error" variant="filled">
+                            Error on loading from clipboard!
+                        </Alert>
+                    </Snackbar>
 
-                <TextField
-                    multiline
-                    rows={10}
-                    fullWidth
-                    value={cssValue}
-                    sx={{ mt: 2 }}
-                />
+                    <Snackbar
+                        open={resetToDef}
+                        autoHideDuration={3500}
+                        onClose={() => setResetToDef(false)}
+                        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                    >
+                        <Alert severity="info" variant="filled">
+                            Loaded default state!
+                        </Alert>
+                    </Snackbar>
 
-                <Snackbar
-                    open={copied}
-                    autoHideDuration={2500}
-                    onClose={() => setCopied(false)}
-                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-                >
-                    <Alert severity="success" variant="filled">
-                        Copied to clipboard!
-                    </Alert>
-                </Snackbar>
+                </Box>
+                <UsageDescription />
 
-                <Snackbar
-                    open={loadedFromClipboard}
-                    autoHideDuration={3500}
-                    onClose={() => setLoadedFromClipboard(false)}
-                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-                >
-                    <Alert severity="success" variant="filled">
-                        Config loaded from clipboard!
-                    </Alert>
-                </Snackbar>
-
-                <Snackbar
-                    open={errorOnClipboard}
-                    autoHideDuration={3500}
-                    onClose={() => setErrorOnClipboard(false)}
-                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-                >
-                    <Alert severity="error" variant="filled">
-                        Error on loading from clipboard!
-                    </Alert>
-                </Snackbar>
-
-                <Snackbar
-                    open={resetToDef}
-                    autoHideDuration={3500}
-                    onClose={() => setResetToDef(false)}
-                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-                >
-                    <Alert severity="info" variant="filled">
-                        Loaded default state!
-                    </Alert>
-                </Snackbar>
-
-            </Box>
-            <Footer/>
+                <Footer/>
 
             </Container>
         </div>
